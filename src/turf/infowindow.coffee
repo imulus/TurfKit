@@ -2,7 +2,9 @@
 
 window.InfoWindows = []
 
-class InfoWindow
+module 'Turf'
+
+Turf.InfoWindow = class
 
   constructor : (@map, @marker, params)->
     InfoWindows.push this

@@ -1,26 +1,24 @@
-class Results
+module 'Turf'
+
+Turf.ResultsTable = class
 
   constructor: (@$table)->
     @$head = @$table.find 'thead'
     @$body = @$table.find 'tbody'
     @total = 0
 
-
   reset: ->
     @$body.empty()
     @total = 0
-
 
   add : (node)->
     @total++
     @addRow node
 
-
   observe : (action, callback) ->
     @$body.find('tr').live action, ->
       id = $(this).attr 'data-marker-id'
       callback id
-
 
   addRow: (node)->
     $row = $('<tr />').attr 'data-marker-id', node.id
@@ -31,7 +29,6 @@ class Results
           $row.append $('<td />').html property.Value
 
     @$body.append $row
-
 
   buildHead : (data)->
     @proto = []

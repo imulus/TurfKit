@@ -1,4 +1,6 @@
-class Map
+module 'Turf'
+
+Turf.Map = class
 
   settings: 
     panControl          : false
@@ -11,7 +13,7 @@ class Map
 
   constructor: (params, @element)->
     @canvas = null
-    @center = new Point params.lat, params.lng
+    @center = new Turf.Point params.lat, params.lng
     @markers = {}
     @settings.center      = @center.latLng
     @settings.mapTypeId   = google.maps.MapTypeId[params.type] or google.maps.MapTypeId['TERRAIN']
@@ -22,7 +24,7 @@ class Map
   setCanvas: (element)-> @canvas = new google.maps.Map document.getElementById(element), @settings
 
   setCenter: (lat, lng) ->
-    @center = new Point params.lat, params.lng
+    @center = new Turf.Point params.lat, params.lng
     do @recenter
 
   recenter: -> @canvas.setCenter @center
@@ -35,7 +37,7 @@ class Map
     @addMarker marker for marker in markers
 
   addMarker: (params)->
-    marker = new Marker this, params
+    marker = new Turf.Marker this, params
     @markers[marker.id] = marker
     return marker
     

@@ -1,9 +1,11 @@
-class Marker
+module 'Turf'
+
+Turf.Marker = class
 
   constructor: (@map, params)->
     @hidden = false
     {@id} = params
-    @center = new Point params.lat, params.lng
+    @center = new Turf.Point params.lat, params.lng
     @infoWindow = null
     @color = params.color || '#F0F'
     shadow = new google.maps.MarkerImage 'http://chart.apis.google.com/chart?chst=d_map_pin_shadow',
@@ -51,7 +53,7 @@ class Marker
 
 
   setInfoWindow : (params)->
-    @infoWindow = new InfoWindow @map, @marker, params
+    @infoWindow = new Turf.InfoWindow @map, @marker, params
     do @observe
 
 

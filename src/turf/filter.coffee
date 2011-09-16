@@ -1,4 +1,6 @@
-class Filter
+module 'Turf'
+
+Turf.Filter = class
 
   constructor: (data, $form)->
     $label = $('<label />').text data.label
