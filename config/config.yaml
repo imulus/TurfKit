@@ -1,0 +1,14 @@
+js:
+  compress    : false
+  verbose     : true
+  output      : 'lib/turf/turfkit.js'
+  input       :
+    - src/google/maps/extended_api.js
+    - src/extensions.coffee
+    - src/turf.coffee
+    - src/turf/filter.coffee
+    - src/turf/results.coffee    
+    - src/turf/point.coffee
+    - src/turf/infowindow.coffee
+    - src/turf/marker.coffee
+    - src/turf/map.coffee

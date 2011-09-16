@@ -1,3 +1,5 @@
+# @TODO - bind infowindows to class instead of window
+
 window.InfoWindows = []
 
 class InfoWindow
