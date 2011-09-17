@@ -1,0 +1,164 @@
+{
+  "map" : {
+    "lat" : "40.014994",
+    "lng" : "-105.270481",
+    "zoom" : "14"
+  },
+
+  "table": {
+    "name"      : "Name",
+    "category"  : "Category",
+    "address"   : "Address",
+    "phone"     : "Phone",
+    "website"   : "Website"
+  },
+
+  "infoWindow": {
+    "title" : "<h1>{{name}}</h1>",
+    "body"  : "<p>{{address}} <br /> {{phone}} <br /> <a href='{{website}}'>{{website}}</a>"
+  },
+
+  "filters": [
+    {
+      "label" : "Category",
+      "key"   : "category"
+    },
+    {
+      "label" : "Rating",
+      "key"   : "rating"
+    }
+  ],
+
+  "points" : [
+    {
+      "id" : "1",
+      "lat" : "40.014729",
+      "lng" : "-105.273114",
+      "properties" : {
+        "category" : "Pizza",
+        "rating"   : "5 stars",
+        "name" : "Jalino's Pizza",
+        "address" : "1647 Arapahoe Ave, Boulder, CO",
+        "phone" : "(303) 443-6300",
+        "website" : "http://jalinospizza.com"
+      }
+    },
+    {
+      "id" : "2",
+      "lat" : "40.000166",
+      "lng" : "-105.261099",
+      "properties" : {
+        "category" : "Pizza",
+        "rating"   : "4 stars",
+        "name" : "Beau Jo's Pizza",
+        "address" : "2690 Baseline Road, Boulder, CO",
+        "phone" : "(303) 554-5312",
+        "website" : "http://beaujos.com"
+      }
+    },
+    {
+      "id" : "3",
+      "lat" : "40.009519",
+      "lng" : "-105.276479",
+      "properties" : {
+        "category" : "Pizza",
+        "rating"   : "5 stars",
+        "name" : "Fatty J's Pizza",
+        "address" : "1301 Broadway St., Boulder, CO",
+        "phone" : "(303) 442-6666",
+        "website" : "http://fattyjspizza.com"
+      }
+    },
+    {
+      "id" : "4",
+      "lat" : "40.007732",
+      "lng" : "-105.276056",
+      "properties" : {
+        "category" : "Pizza",
+        "rating"   : "3 stars",
+        "name" : "Abo's Pizza",
+        "address" : "1124 13th Street, Boulder, CO",
+        "phone" : "(303) 443-3199",
+        "website" : "http://abospizza.com"
+      }
+    },
+    {
+      "id" : "5",
+      "lat" : "40.009712",
+      "lng" : "-105.276652",
+      "properties" : {
+        "category" : "Pizza",
+        "rating"   : "3 stars",
+        "name" : "Cosmo's Pizza",
+        "address" : "1325 Broadway St # 108, Boulder, CO",
+        "phone" : "(303) 447-3278",
+        "website" : "http://cosmospizza.com"
+      }
+    },
+    {
+      "id" : "6",
+      "lat" : "40.016725",
+      "lng" : "-105.280832",
+      "properties" : {
+        "category" : "Mexican",
+        "rating"   : "4 stars",
+        "name" : "Rio Grande Mexican Restaurant",
+        "address" : "1101 Walnut Street, Boulder, CO",
+        "phone" : "(303) 444-3690",
+        "website" : "http://riograndemexican.com"
+      }
+    },
+    {
+      "id" : "7",
+      "lat" : "40.020212",
+      "lng" : "-105.251968",
+      "properties" : {
+        "category" : "Mexican",
+        "rating"   : "5 stars",
+        "name" : "Casa Alvarez",
+        "address" : "3161 Walnut Street, Boulder, CO",
+        "phone" : "(303) 546-0630",
+        "website" : "http://casaalvarezcolorado.com"
+      }
+    },
+    {
+      "id" : "8",
+      "lat" : "40.014788",
+      "lng" : "-105.261498",
+      "properties" : {
+        "category" : "Mexican",
+        "name" : "Zolo Grill",
+        "rating"   : "3 stars",
+        "address" : "2525 Arapahoe Avenue, Boulder, CO",
+        "phone" : "(303) 449-0444",
+        "website" : "http://zologrill.com"
+      }
+    },
+    {
+      "id" : "9",
+      "lat" : "40.017092",
+      "lng" : "-105.283156",
+      "properties" : {
+        "category" : "Mexican",
+        "rating"   : "2 stars",
+        "name" : "Centro, Latin Kitchen & Refreshment Palace",
+        "address" : "950 Pearl Street, Boulder, CO",
+        "phone" : "(303) 442-7771",
+        "website" : "http://centrolatinkitchen.com"
+      }
+    },
+    {
+      "id" : "10",
+      "lat" : "40.016635",
+      "lng" : "-105.256055",
+      "properties" : {
+        "category" : "Mexican",
+        "rating"   : "2 stars",
+        "name" : "Cantina Laredo",
+        "address" : "1680 29th Street, Boulder, CO",
+        "phone" : "(303) 444-2260",
+        "website" : "http://cantinalaredo.com"
+      }
+    }
+  ]
+}

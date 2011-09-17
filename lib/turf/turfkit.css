@@ -1,0 +1,9 @@
+.infowindow-content .title {
+	font-weight: bold;
+	font-size: 1.2em;
+	display: block;
+}
+
+table td,
+table th { padding: 5px; }
+table thead td { font-weight: bold; }	

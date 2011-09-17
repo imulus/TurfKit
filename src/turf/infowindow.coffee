@@ -1,17 +1,15 @@
-# @TODO - bind infowindows to class instead of window
-
-window.InfoWindows = []
-
 module 'Turf'
 
-Turf.InfoWindow = class
+Turf.InfoWindow = class InfoWindow
+
+  @windows = []
 
   constructor : (@map, @marker, params)->
-    InfoWindows.push this
+    InfoWindow.windows.push this
     {@title, @body} = params
+    @settings = {}
     do @build
 
-  settings : {}
 
   build : ->
     content = "<div class='infowindow-content'>"
@@ -23,13 +21,16 @@ Turf.InfoWindow = class
     
     @window = new google.maps.InfoWindow @settings
 
+
   open : -> 
     do @closeAll
     @window.open @map.canvas, @marker
 
+
   close : -> 
     @window.close()
 
+
   closeAll : ->
-    _window.close() for _window in InfoWindows
+    win.close() for win in InfoWindow.windows
 

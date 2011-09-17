@@ -1,42 +1,45 @@
 module 'Turf'
 
-Turf.ResultsTable = class
+Turf.ResultsTable = class ResultsTable
 
-  constructor: (@$table)->
-    @$head = @$table.find 'thead'
-    @$body = @$table.find 'tbody'
+  constructor: (@$table, @data)->
+    @$head  = @$table.find('thead')
+    @$body  = @$table.find('tbody')
+    @proto = []
     @total = 0
+    do @build
+
+  build : ->
+    $row = $('<tr />')
+    for key, value of @data.table
+      @proto.push key
+      $cell = $('<td />').html value
+      $row.append($cell)
+    @$head.append $row
+
 
   reset: ->
     @$body.empty()
     @total = 0
 
-  add : (node)->
+
+  add : (point)->
     @total++
-    @addRow node
+    @addRow point
 
   observe : (action, callback) ->
     @$body.find('tr').live action, ->
       id = $(this).attr 'data-marker-id'
       callback id
 
-  addRow: (node)->
-    $row = $('<tr />').attr 'data-marker-id', node.id
 
-    for column in @proto
-      for property in node.customProperties
-        if property.Key is column
-          $row.append $('<td />').html property.Value
+  addRow: (point)->
+    $row = $('<tr />').attr 'data-marker-id', point.id
+
+    for key in @proto
+      $row.append $('<td />').html point.properties[key]
 
     @$body.append $row
 
-  buildHead : (data)->
-    @proto = []
-    $row = $('<tr />')
 
-    for column in data.table
-      @proto.push column.Key
-      $cell = $('<td />').html column.Value
-      $row.append($cell)
 
-    @$head.append $row

@@ -1,13 +1,13 @@
 module 'Turf'
 
-Turf.Marker = class
+Turf.Marker = class Marker
 
   constructor: (@map, params)->
     @hidden = false
     {@id} = params
     @center = new Turf.Point params.lat, params.lng
     @infoWindow = null
-    @color = params.color || '#F0F'
+    @color = params.color || '#D23'
     shadow = new google.maps.MarkerImage 'http://chart.apis.google.com/chart?chst=d_map_pin_shadow',
       new google.maps.Size(40, 37), new google.maps.Point(0,0), new google.maps.Point(0, 37)
 
@@ -45,9 +45,9 @@ Turf.Marker = class
     height  = 34
 
     icon = new google.maps.MarkerImage(url,
-         new google.maps.Size(width, height),
-         new google.maps.Point(0,0),
-         new google.maps.Point(0, height))
+           new google.maps.Size(width, height),
+           new google.maps.Point(0,0),
+           new google.maps.Point(0, height))
 
     @marker.setOptions icon: icon
 

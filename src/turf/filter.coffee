@@ -1,15 +1,14 @@
 module 'Turf'
 
-Turf.Filter = class
+Turf.Filter = class Filter
 
-  constructor: (data, $form)->
-    $label = $('<label />').text data.label
+  constructor: ($container, params, @points)->
+    @values = {}
+    @key = params.key
+    $label = $('<label />').text params.label
     @$element = $('<select />')
     @$element.append $('<option />').attr('value','all').text 'All'
-    $form.prepend $label, @$element
-    @field = data.fieldKey
-    @values = {}
-
+    $container.append $label, @$element
 
   add: (value)->
     if not @values[value]
@@ -20,16 +19,14 @@ Turf.Filter = class
   change : (callback)->
     @$element.change =>
       value = @$element.find('option:selected').val()
-      results = @filter @field, value
+      results = @filter value
       callback results
 
 
-  filter : (field, value)->
+  filter : (value)->
     results = []
-    for item, index in Filter.data
-      for property in item.customProperties
-        if property.Key is field and (property.Value is value or value == 'all')
-          results.push item
+    for point in @points
+      results.push point if point.properties[@key] is value or value is 'all'
     return results
          
          

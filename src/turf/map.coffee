@@ -1,6 +1,6 @@
 module 'Turf'
 
-Turf.Map = class
+Turf.Map = class Map
 
   settings: 
     panControl          : false
@@ -11,7 +11,7 @@ Turf.Map = class
     overviewMapControl  : false
     mapTypeControl      : false
 
-  constructor: (params, @element)->
+  constructor: (@element, params)->
     @canvas = null
     @center = new Turf.Point params.lat, params.lng
     @markers = {}
