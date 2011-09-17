@@ -12,7 +12,7 @@ Turf.InfoWindow = class InfoWindow
 
 
   build : ->
-    content = "<div class='infowindow-content'>"
+    content = "<div class='infowindow'>"
     if @title then content += "<div class='title'>#{@title}</div>"
     if @body then content += "<div class='body'>#{@body}</div>"
     content += "</div>";

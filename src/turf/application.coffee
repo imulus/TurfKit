@@ -2,8 +2,7 @@ module 'Turf'
 
 Turf.Application = class Turf.Application
 
-  constructor: (@wrapper_id, data)->
-    @$wrapper = $("##{@wrapper_id}");
+  constructor: (data)->
 
     if typeof data is 'string'
       $.ajax
