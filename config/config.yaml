@@ -5,13 +5,10 @@ js:
   input       :
     - src/google/maps/extended_api.js
     - src/extensions.coffee
-    - src/turf/turf.coffee
-    - src/turf/filter.coffee
-    - src/turf/results.coffee    
-    - src/turf/point.coffee
-    - src/turf/infowindow.coffee
-    - src/turf/marker.coffee
-    - src/turf/map.coffee
-    - src/turf/application.coffee
-    
-    
+    - src/turf/core/infowindow.coffee
+    - src/turf/core/map.coffee
+    - src/turf/core/marker.coffee
+    - src/turf/core/point.coffee
+    - src/turf/client/filter.coffee
+    - src/turf/client/results.coffee
+    - src/turf/client/application.coffee
