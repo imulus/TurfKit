@@ -11,7 +11,7 @@
 
   <script src="/lib/turf/turfkit.js"></script>
 
-  <script type="text/javascript" charset="utf-8">
+  <script type="text/javascript">
     $(function(){
       new Turf.Client.Application("restaurants.json");
     });
@@ -19,22 +19,36 @@
 </head>
 <body>
 
-  <div id="container">
-    <a href="http://imulus.github.com/turfkit" id="logo"><b>Turf</b>Kit</a>
+  <header>
+    <p>
+      <a href="http://imulus.github.com/turfkit" id="logo"><span>Turf</span>Kit</a>      
+      A little library for building JSON-powered Google Maps applications
+    </p>
+  </header>
 
+  <section id="container">
     <div id="map"></div>
     <div id="filters"></div>
     <table id="results">
       <thead></thead>
       <tbody></tbody>
     </table>
-  </div>
+  </section>
+  
+  <section id="documentation">
+    <h1>Documentation</h1>
+    <h2>Markup</h2>
+    <script src="https://gist.github.com/1224811.js?file=index.html"></script>    
+    
+    <h2>JSON</h2>
+    <script src="https://gist.github.com/1224811.js?file=restaurants.json"></script>    
+  </section>
 
-  <div id="footer">
+  <footer>
     <a href="http://imulus.com" id="imulus">
       <img src="http://imulus.github.com/coyote/images/imulus.png" />
     </a>
-  </div>
+  </footer>
 
 
 </body>

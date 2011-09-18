@@ -12,24 +12,68 @@ html,body {
 a { color: #4daed8; }
 b { font-weight: bold; }
 
-div#container {
-  width: 900px;
-  padding: 40px 50px;
-  margin: 60px auto 30px;  
-  background: #fff;
-  border-radius: 1px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+h1 {
+  font-size: 29px;
+  margin: 0 0 20px;
 }
 
-a#logo {
+h2 {
+  font-size: 23px;
+  margin: 20px 0 10px;
+}
+
+hr {
   display: block;
-  font-family: 'PT Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 38px;    
-  text-decoration: none;
-  margin-bottom: 10px;
+  height: 0px;
+  border: 0;
+  border-bottom: 1px solid #4daed8;
+  margin: 40px 0;
 }
 
-a#logo b { margin-right: 1px; }
+
+/**/
+
+header,
+footer,
+section {
+  width: 900px;
+  padding: 40px;
+  margin: auto;  
+  background: #FFF;
+  position: relative;
+}
+
+
+header {
+  background: #fff;
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;  
+  border-bottom: 1px solid #DDD;
+}
+
+
+header p {
+  font-family: 'PT Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+}
+
+header a#logo {
+  display: inline-block;
+  font-size: 38px;    
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+header a#logo span { margin-right: 1px; }
+
+
+#container {
+  background: #F0F0F0;
+  border-top: 1px solid #FFF;
+}
 
 div#map {
   width: 100%;
@@ -40,7 +84,7 @@ div#map {
 div#filters {
   margin: 20px 0;
   padding: 10px;
-  background: #f0f0f0;
+  background: #DDD;
   border: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -87,7 +131,8 @@ div.infowindow .body p {
   margin: 0;
 }
 
-div#footer {
+footer {
+  background: none;
   text-align: center;
   margin-bottom: 100px;
 }
