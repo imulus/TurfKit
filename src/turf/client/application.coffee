@@ -3,6 +3,7 @@
   class @Application
   
     constructor: (data)->
+      @$map = $("#map")
 
       if typeof data is 'string'
         $.ajax
@@ -18,7 +19,8 @@
 
     build : ->
       json = @data
-      @map = new Turf.Core.Map "map", json.map
+      
+      @map = new Turf.Core.Map @$map.get(0), json.map
       @results = new Turf.Client.ResultsTable $('#results'), json
       @results.reset()
       @results.observe 'hover', (id)=>

@@ -21,7 +21,7 @@
       @setCanvas @element if @element
       @addMarkers params.markers if params.markers
   
-    setCanvas: (element)-> @canvas = new google.maps.Map document.getElementById(element), @settings
+    setCanvas: (element)-> @canvas = new google.maps.Map element, @settings
 
     setCenter: (lat, lng) ->
       @center = new Turf.Core.Point params.lat, params.lng
