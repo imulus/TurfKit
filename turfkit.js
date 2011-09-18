@@ -418,9 +418,9 @@ this.module("Turf.Core", function() {
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 this.module("Turf.Client", function() {
   return this.Filter = (function() {
-    function Filter($container, params, points) {
+    function Filter($container, params, markers) {
       var $label;
-      this.points = points;
+      this.markers = markers;
       this.values = {};
       this.key = params.key;
       $label = $('<label />').text(params.label);
@@ -443,13 +443,13 @@ this.module("Turf.Client", function() {
       }, this));
     };
     Filter.prototype.filter = function(value) {
-      var point, results, _i, _len, _ref;
+      var marker, results, _i, _len, _ref;
       results = [];
-      _ref = this.points;
+      _ref = this.markers;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        point = _ref[_i];
-        if (point.properties[this.key] === value || value === 'all') {
-          results.push(point);
+        marker = _ref[_i];
+        if (marker.properties[this.key] === value || value === 'all') {
+          results.push(marker);
         }
       }
       return results;
@@ -491,9 +491,9 @@ this.module("Turf.Client", function() {
       this.$body.empty();
       return this.total = 0;
     };
-    ResultsTable.prototype.add = function(point) {
+    ResultsTable.prototype.add = function(marker) {
       this.total++;
-      return this.addRow(point);
+      return this.addRow(marker);
     };
     ResultsTable.prototype.observe = function(action, callback) {
       return this.$body.find('tr').live(action, function() {
@@ -502,13 +502,13 @@ this.module("Turf.Client", function() {
         return callback(id);
       });
     };
-    ResultsTable.prototype.addRow = function(point) {
+    ResultsTable.prototype.addRow = function(marker) {
       var $row, key, _i, _len, _ref;
-      $row = $('<tr />').attr('data-marker-id', point.id);
+      $row = $('<tr />').attr('data-marker-id', marker.id);
       _ref = this.proto;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         key = _ref[_i];
-        $row.append($('<td />').html(point.properties[key]));
+        $row.append($('<td />').html(marker.properties[key]));
       }
       return this.$body.append($row);
     };
@@ -521,6 +521,7 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 this.module("Turf.Client", function() {
   return this.Application = (function() {
     function Application(data) {
+      this.$map = $("#map");
       if (typeof data === 'string') {
         $.ajax({
           url: data,
@@ -536,10 +537,9 @@ this.module("Turf.Client", function() {
       }
     }
     Application.prototype.build = function() {
-      var filter, json, map_element, point, _filter, _i, _j, _k, _len, _len2, _len3, _ref, _ref2, _ref3, _results;
+      var filter, json, marker, _filter, _i, _j, _k, _len, _len2, _len3, _ref, _ref2, _ref3, _results;
       json = this.data;
-      map_element = $("#map").get(0);
-      this.map = new Turf.Core.Map(map_element, json.map);
+      this.map = new Turf.Core.Map(this.$map.get(0), json.map);
       this.results = new Turf.Client.ResultsTable($('#results'), json);
       this.results.reset();
       this.results.observe('hover', __bind(function(id) {
@@ -551,16 +551,15 @@ this.module("Turf.Client", function() {
       _ref = json.filters;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         _filter = _ref[_i];
-        filter = new Turf.Client.Filter($("#filters"), _filter, json.points);
-        filter.change(__bind(function(points) {
-          var point, _j, _len2, _results;
-          console.log(points);
+        filter = new Turf.Client.Filter($("#filters"), _filter, json.markers);
+        filter.change(__bind(function(markers) {
+          var marker, _j, _len2, _results;
           this.results.reset();
           this.map.hideMarkers(true);
           _results = [];
-          for (_j = 0, _len2 = points.length; _j < _len2; _j++) {
-            point = points[_j];
-            _results.push(this.addPoint(point));
+          for (_j = 0, _len2 = markers.length; _j < _len2; _j++) {
+            marker = markers[_j];
+            _results.push(this.addMarker(marker));
           }
           return _results;
         }, this));
@@ -571,20 +570,20 @@ this.module("Turf.Client", function() {
         filter = _ref2[_j];
         filter.reset();
       }
-      _ref3 = json.points;
+      _ref3 = json.markers;
       _results = [];
       for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-        point = _ref3[_k];
-        _results.push(this.addPoint(point));
+        marker = _ref3[_k];
+        _results.push(this.addMarker(marker));
       }
       return _results;
     };
-    Application.prototype.addPoint = function(point) {
+    Application.prototype.addMarker = function(marker) {
       var filter, key, value, _i, _len, _ref, _ref2;
       _ref = this.filters;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         filter = _ref[_i];
-        _ref2 = point.properties;
+        _ref2 = marker.properties;
         for (key in _ref2) {
           value = _ref2[key];
           if (key === filter.key) {
@@ -592,18 +591,18 @@ this.module("Turf.Client", function() {
           }
         }
       }
-      this.results.add(point);
+      this.results.add(marker);
       return this.map.addMarker({
-        id: point.id,
-        lat: point.lat,
-        lng: point.lng,
-        infoWindow: this.makeInfoWindow(point)
+        id: marker.id,
+        lat: marker.lat,
+        lng: marker.lng,
+        infoWindow: this.makeInfoWindow(marker)
       });
     };
-    Application.prototype.makeInfoWindow = function(point) {
+    Application.prototype.makeInfoWindow = function(marker) {
       var body, pattern, swap, title;
       swap = function(key) {
-        return point.properties[key.replace(/[{{}}]+/g, "")] || "";
+        return marker.properties[key.replace(/[{{}}]+/g, "")] || "";
       };
       pattern = /{{[^{}]+}}/g;
       title = this.data.infoWindow.title.replace(pattern, swap);
