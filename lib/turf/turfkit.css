@@ -114,9 +114,9 @@ table thead td {
   border-bottom: 1px solid #DDD;
 }
 
-table tr:hover td {
+table tbody tr:hover td {
   color: #000;
-  background: #F0F0F0;
+  background: #E8E8E8;
   cursor: pointer;
 }
 
