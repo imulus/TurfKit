@@ -23,9 +23,9 @@
       @total = 0
 
 
-    add : (point)->
+    add : (marker)->
       @total++
-      @addRow point
+      @addRow marker
 
     observe : (action, callback) ->
       @$body.find('tr').live action, ->
@@ -33,10 +33,10 @@
         callback id
 
 
-    addRow: (point)->
-      $row = $('<tr />').attr 'data-marker-id', point.id
+    addRow: (marker)->
+      $row = $('<tr />').attr 'data-marker-id', marker.id
 
       for key in @proto
-        $row.append $('<td />').html point.properties[key]
+        $row.append $('<td />').html marker.properties[key]
 
       @$body.append $row

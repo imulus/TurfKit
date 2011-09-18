@@ -30,36 +30,35 @@
       @filters = []
 
       for _filter in json.filters
-        filter = new Turf.Client.Filter $("#filters"), _filter, json.points
+        filter = new Turf.Client.Filter $("#filters"), _filter, json.markers
 
-        filter.change (points)=>
-          console.log points
+        filter.change (markers)=>
           @results.reset()
           @map.hideMarkers true
-          @addPoint point for point in points
+          @addMarker marker for marker in markers
 
         @filters.push filter
 
       filter.reset() for filter in @filters
-      @addPoint point for point in json.points
+      @addMarker marker for marker in json.markers
 
 
-    addPoint : (point)->
+    addMarker : (marker)->
       for filter in @filters
-        for key, value of point.properties
+        for key, value of marker.properties
           filter.add value if key is filter.key
 
-      @results.add point
+      @results.add marker
 
       @map.addMarker
-        id  : point.id
-        lat : point.lat
-        lng : point.lng
-        infoWindow: @makeInfoWindow point
+        id  : marker.id
+        lat : marker.lat
+        lng : marker.lng
+        infoWindow: @makeInfoWindow marker
         
 
-    makeInfoWindow : (point)->
-      swap = (key)-> point.properties[key.replace(/[{{}}]+/g, "")] or ""
+    makeInfoWindow : (marker)->
+      swap = (key)-> marker.properties[key.replace(/[{{}}]+/g, "")] or ""
       pattern = /{{[^{}]+}}/g
       title  = @data.infoWindow.title.replace pattern, swap
       body   = @data.infoWindow.body.replace pattern, swap

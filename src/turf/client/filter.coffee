@@ -2,7 +2,7 @@
   
   class @Filter
 
-    constructor: ($container, params, @points)->
+    constructor: ($container, params, @markers)->
       @values = {}
       @key = params.key
       $label = $('<label />').text params.label
@@ -25,8 +25,8 @@
 
     filter : (value)->
       results = []
-      for point in @points
-        results.push point if point.properties[@key] is value or value is 'all'
+      for marker in @markers
+        results.push marker if marker.properties[@key] is value or value is 'all'
       return results
          
          
