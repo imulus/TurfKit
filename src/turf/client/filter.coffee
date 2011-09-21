@@ -22,6 +22,7 @@
 
       do @build
 
+
     build: ->
       @$label = $('<label />').text @params.label
       @$select = $('<select />')
@@ -33,35 +34,22 @@
       @$container.append @$label, @$select
 
 
-
-
-
     change : (callback)->
       @$select.change =>
         Filter.applied[@key] = @$select.find('option:selected').val()
-
+        
         results = []
+        total_rules = 0
+        total_rules++ for key, value of Filter.applied
 
         for marker in Filter.markers
-          include = true
-          
+          rules_met = 0
           for key, value of Filter.applied
-            if value is 'all'
-              include = true
-              break
-            if marker.properties[key] isnt value
-              include = false
-            
-          results.push marker if include
+            if marker.properties[key] is value or value is 'all'
+              rules_met++
+          results.push marker if rules_met is total_rules
 
         Filter.results = results
-
         callback(Filter.results)
      
          
-    reset : ->
-      @values = {}
-      @$select.empty()
-      @$select.append "<option value='all'>All</option>"
-
-
