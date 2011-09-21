@@ -1,7 +1,7 @@
 @module "Turf.Client", ->
-  
+
   class @Application
-  
+
     constructor: (data)->
       @$map = $("#map")
 
@@ -19,7 +19,10 @@
 
     build : ->
       json = @data
-      
+      Filter = Turf.Client.Filter
+      Filter.markers = json.markers
+      Filter.results = json.markers
+
       @map = new Turf.Core.Map @$map.get(0), json.map
       @results = new Turf.Client.ResultsTable $('#results'), json
       @results.reset()
@@ -27,27 +30,20 @@
         marker = @map.markers[id]
         marker.infoWindow.open()
 
-      @filters = []
+      @filters = {}
 
       for _filter in json.filters
-        filter = new Turf.Client.Filter $("#filters"), _filter, json.markers
-
-        filter.change (markers)=>
+        filter = new Filter $("#filters"), _filter
+        filter.change (markers) =>
           @results.reset()
           @map.hideMarkers true
           @addMarker marker for marker in markers
+        @filters[_filter.key] = filter
 
-        @filters.push filter
-
-      filter.reset() for filter in @filters
       @addMarker marker for marker in json.markers
 
 
     addMarker : (marker)->
-      for filter in @filters
-        for key, value of marker.properties
-          filter.add value if key is filter.key
-
       @results.add marker
 
       @map.addMarker
@@ -55,7 +51,7 @@
         lat : marker.lat
         lng : marker.lng
         infoWindow: @makeInfoWindow marker
-        
+
 
     makeInfoWindow : (marker)->
       swap = (key)-> marker.properties[key.replace(/[{{}}]+/g, "")] or ""

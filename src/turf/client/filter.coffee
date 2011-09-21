@@ -2,37 +2,66 @@
   
   class @Filter
 
-    constructor: ($container, params, @markers)->
-      @values = {}
-      @key = params.key
-      $label = $('<label />').text params.label
-      @$element = $('<select />')
-      @$element.append $('<option />').attr('value','all').text 'All'
-      $container.append $label, @$element
+    @markers = []
+    @results = []
+    @applied = {}
 
-    add: (value)->
-      if not @values[value]
-        @$element.append "<option value='" + value + "'>" + value + "</option>"
-        @values[value] = true
+    @reset = ->
+      @results = @markers
+      @applied = {}
+
+
+    constructor: (@$container, @params)->
+      @values = []
+      @key = @params.key  
+
+      for marker in Filter.markers
+        value = marker.properties[@key]
+        if value in @values is false
+          @values.push value
+
+      do @build
+
+    build: ->
+      @$label = $('<label />').text @params.label
+      @$select = $('<select />')
+      @$select.append $('<option />').attr('value','all').text 'All'
+      
+      for value in @values      
+        @$select.append "<option value='" + value + "'>" + value + "</option>"    
+      
+      @$container.append @$label, @$select
+
+
+
 
 
     change : (callback)->
-      @$element.change =>
-        value = @$element.find('option:selected').val()
-        results = @filter value
-        callback results
+      @$select.change =>
+        Filter.applied[@key] = @$select.find('option:selected').val()
 
+        results = []
 
-    filter : (value)->
-      results = []
-      for marker in @markers
-        results.push marker if marker.properties[@key] is value or value is 'all'
-      return results
-         
+        for marker in Filter.markers
+          include = true
+          
+          for key, value of Filter.applied
+            if value is 'all'
+              include = true
+              break
+            if marker.properties[key] isnt value
+              include = false
+            
+          results.push marker if include
+
+        Filter.results = results
+
+        callback(Filter.results)
+     
          
     reset : ->
       @values = {}
-      @$element.empty()
-      @$element.append "<option value='all'>All</option>"
+      @$select.empty()
+      @$select.append "<option value='all'>All</option>"
 
 
